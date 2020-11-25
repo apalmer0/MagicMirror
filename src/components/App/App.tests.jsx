@@ -1,13 +1,13 @@
-import React from 'react';
-import expect from 'expect';
-import { mount } from 'enzyme';
+import React from 'react'
+import expect from 'expect'
+import { mount } from 'enzyme'
 
-import App from 'components/App';
+import App from 'components/App'
 
 describe('App - component', () => {
   it('renders', () => {
-    const Component = mount(<App />);
+    const Component = mount(<App />)
 
-    expect(Component.length).toEqual(1);
-  });
-});
+    expect(Component.length).toEqual(1)
+  })
+})

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import moment from 'moment';
+import React, { Component } from 'react'
+import moment from 'moment'
 
-import styles from './styles';
+import styles from './styles'
 
 class Clock extends Component {
   state = {
@@ -10,27 +10,27 @@ class Clock extends Component {
     time: moment().format('h:mm a'),
   }
 
-  componentWillMount () {
-    const intervalId = setInterval(() => this.setTime(), 1000);
+  componentWillMount() {
+    const intervalId = setInterval(() => this.setTime(), 1000)
 
-    this.setState({ intervalId });
+    this.setState({ intervalId })
   }
 
   componentWillUnmount() {
-    clearInterval(this.state.intervalId);
+    clearInterval(this.state.intervalId)
   }
 
   setTime = () => {
-    const date = moment().format('MMMM Do YYYY');
-    const day = moment().format('dddd');
-    const time = moment().format('h:mm a');
+    const date = moment().format('MMMM Do YYYY')
+    const day = moment().format('dddd')
+    const time = moment().format('h:mm a')
 
-    this.setState({ date, day, time });
+    this.setState({ date, day, time })
   }
 
-  render () {
-    const { date, day, time } = this.state;
-    const { dateStyles, dayStyles, timeStyles } = styles;
+  render() {
+    const { date, day, time } = this.state
+    const { dateStyles, dayStyles, timeStyles } = styles
 
     return (
       <div>
@@ -38,8 +38,8 @@ class Clock extends Component {
         <p style={dateStyles}>{date}</p>
         <p style={timeStyles}>{time}</p>
       </div>
-    );
+    )
   }
 }
 
-export default Clock;
+export default Clock

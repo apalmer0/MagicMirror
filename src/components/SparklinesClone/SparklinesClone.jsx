@@ -1,13 +1,7 @@
-import React, { PureComponent } from 'react';
-import {
-  arrayOf,
-  node,
-  number,
-  shape,
-  string,
-} from 'prop-types';
+import React, { PureComponent } from 'react'
+import { arrayOf, node, number, shape, string } from 'prop-types'
 
-import helpers from './helpers';
+import helpers from './helpers'
 
 class SparklinesClone extends PureComponent {
   render() {
@@ -24,16 +18,16 @@ class SparklinesClone extends PureComponent {
       svgHeight,
       svgWidth,
       width,
-    } = this.props;
+    } = this.props
     const data = dataObjects.map((val) => {
-      const { temp, precip } = val;
+      const { temp, precip } = val
 
-      return { temp, precip };
-    });
+      return { temp, precip }
+    })
 
-    const labels = dataObjects.map(val => val.time);
+    const labels = dataObjects.map((val) => val.time)
 
-    if (dataObjects.length === 0) return null;
+    if (dataObjects.length === 0) return null
 
     const points = helpers.dataToPoints({
       data,
@@ -43,39 +37,39 @@ class SparklinesClone extends PureComponent {
       max,
       min,
       width,
-    });
-    const viewBox = `0 0 ${width} ${height + 10}`;
-    const svgOpts = { style, viewBox, preserveAspectRatio };
+    })
+    const viewBox = `0 0 ${width} ${height + 10}`
+    const svgOpts = { style, viewBox, preserveAspectRatio }
 
-    if (svgWidth > 0) svgOpts.width = svgWidth;
-    if (svgHeight > 0) svgOpts.height = svgHeight;
+    if (svgWidth > 0) svgOpts.width = svgWidth
+    if (svgHeight > 0) svgOpts.height = svgHeight
 
     return (
       <svg {...svgOpts}>
-        {
-          React.Children.map(children, (child) => {
-            return React.cloneElement(child, {
-              data,
-              height,
-              labels,
-              margin,
-              points,
-              width,
-            });
+        {React.Children.map(children, (child) => {
+          return React.cloneElement(child, {
+            data,
+            height,
+            labels,
+            margin,
+            points,
+            width,
           })
-        }
+        })}
       </svg>
-    );
+    )
   }
 }
 
 SparklinesClone.propTypes = {
   children: node.isRequired,
-  dataObjects: arrayOf(shape({
-    precip: number,
-    temp: number,
-    time: string,
-  })),
+  dataObjects: arrayOf(
+    shape({
+      precip: number,
+      temp: number,
+      time: string,
+    }),
+  ),
   height: number,
   labels: arrayOf(string),
   limit: number,
@@ -89,7 +83,7 @@ SparklinesClone.propTypes = {
   svgHeight: number,
   svgWidth: number,
   width: number,
-};
+}
 
 SparklinesClone.defaultProps = {
   dataObjects: [],
@@ -105,6 +99,6 @@ SparklinesClone.defaultProps = {
   svgWidth: 0,
   style: {},
   width: 240,
-};
+}
 
-export default SparklinesClone;
+export default SparklinesClone

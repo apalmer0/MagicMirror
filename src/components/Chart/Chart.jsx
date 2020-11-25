@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import { arrayOf, number, shape, string } from 'prop-types';
+import React, { Component } from 'react'
+import { arrayOf, number, shape, string } from 'prop-types'
 
-import SparklinesClone from '../SparklinesClone';
-import Barchart from '../Barchart';
+import SparklinesClone from '../SparklinesClone'
+import Barchart from '../Barchart'
 
-const WHITE = '#ffffff';
+const WHITE = '#ffffff'
 
 class Chart extends Component {
-  render () {
-    const { data } = this.props;
-    const whiteBars = { fill: WHITE };
+  render() {
+    const { data } = this.props
+    const whiteBars = { fill: WHITE }
 
-    if (!data) return false;
+    if (!data) return false
 
     return (
       <div>
@@ -19,16 +19,18 @@ class Chart extends Component {
           <Barchart style={whiteBars} />
         </SparklinesClone>
       </div>
-    );
+    )
   }
 }
 
 Chart.propTypes = {
-  data: arrayOf(shape({
-    precip: number,
-    temp: number,
-    time: string,
-  })).isRequired,
-};
+  data: arrayOf(
+    shape({
+      precip: number,
+      temp: number,
+      time: string,
+    }),
+  ).isRequired,
+}
 
-export default Chart;
+export default Chart

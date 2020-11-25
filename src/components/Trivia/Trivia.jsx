@@ -1,42 +1,36 @@
-import React, { Component } from 'react';
-import { arrayOf, number, shape, string } from 'prop-types';
-import { connect } from 'react-redux';
-import { startCase } from 'lodash';
+import React, { Component } from 'react'
+import { arrayOf, number, shape, string } from 'prop-types'
+import { connect } from 'react-redux'
+import { startCase } from 'lodash'
 
-import Stats from '../Stats';
-import styles from './styles';
-import TriviaTips from '../TriviaTips';
+import Stats from '../Stats'
+import styles from './styles'
+import TriviaTips from '../TriviaTips'
 
 class Trivia extends Component {
   multipleChoice = (item) => {
-    const {
-      correct_letter: correctLetter,
-      guess,
-      options,
-      status,
-    } = item;
-    const letters = Object.keys(options);
-    const { answerContainerStyles, correctStyle, guessStyle } = styles;
-    const answered = status !== 'unanswered';
+    const { correct_letter: correctLetter, guess, options, status } = item
+    const letters = Object.keys(options)
+    const { answerContainerStyles, correctStyle, guessStyle } = styles
+    const answered = status !== 'unanswered'
 
-    return (
-      letters.map((letter) => {
-        const guessed = guess && guess.toUpperCase() === letter;
-        const correct = answered && correctLetter && correctLetter.toUpperCase() === letter;
-        const style = {
-          ...answerContainerStyles,
-          ...guessed ? guessStyle : {},
-          ...correct ? correctStyle : {},
-        };
+    return letters.map((letter) => {
+      const guessed = guess && guess.toUpperCase() === letter
+      const correct =
+        answered && correctLetter && correctLetter.toUpperCase() === letter
+      const style = {
+        ...answerContainerStyles,
+        ...(guessed ? guessStyle : {}),
+        ...(correct ? correctStyle : {}),
+      }
 
-        return (
-          <div style={style} key={letter}>
-            <span>{letter}: </span>
-            <span>{options[letter]}</span>
-          </div>
-        );
-      })
-    );
+      return (
+        <div style={style} key={letter}>
+          <span>{letter}: </span>
+          <span>{options[letter]}</span>
+        </div>
+      )
+    })
   }
 
   trueFalse = (item) => {
@@ -45,32 +39,29 @@ class Trivia extends Component {
       guess,
       incorrect_answers: incorrectAnswers,
       status,
-    } = item;
-    const answerOptions = [
-      ...incorrectAnswers,
-      correctAnswer,
-    ];
-    const answered = status !== 'unanswered';
-    const { answerContainerStyles, correctStyle, guessStyle } = styles;
+    } = item
+    const answerOptions = [...incorrectAnswers, correctAnswer]
+    const answered = status !== 'unanswered'
+    const { answerContainerStyles, correctStyle, guessStyle } = styles
 
-    return (
-      answerOptions.map((answerOption) => {
-        const guessed = startCase(guess) === answerOption;
-        const correct = answered && startCase(answerOption) === correctAnswer;
-        const style = {
-          ...answerContainerStyles,
-          ...guessed ? guessStyle : {},
-          ...correct ? correctStyle : {},
-        };
+    return answerOptions.map((answerOption) => {
+      const guessed = startCase(guess) === answerOption
+      const correct = answered && startCase(answerOption) === correctAnswer
+      const style = {
+        ...answerContainerStyles,
+        ...(guessed ? guessStyle : {}),
+        ...(correct ? correctStyle : {}),
+      }
 
-        return (
-          <div style={style} key={answerOption}>{answerOption}</div>
-        );
-      })
-    );
+      return (
+        <div style={style} key={answerOption}>
+          {answerOption}
+        </div>
+      )
+    })
   }
 
-  render () {
+  render() {
     const {
       categoryStyles,
       containerStyles,
@@ -80,8 +71,8 @@ class Trivia extends Component {
       questionStyles,
       redStyle,
       statusStyles,
-    } = styles;
-    const { triviaItems, triviaStats } = this.props;
+    } = styles
+    const { triviaItems, triviaStats } = this.props
 
     return (
       <div>
@@ -93,14 +84,14 @@ class Trivia extends Component {
             question_type: questionType,
             question,
             status,
-          } = item;
-          const trueFalse = questionType === 'boolean';
-          const multipleChoice = questionType === 'multiple';
+          } = item
+          const trueFalse = questionType === 'boolean'
+          const multipleChoice = questionType === 'multiple'
           const statusStyle = {
             ...statusStyles,
-            ...(status === 'correct') ? greenStyle : {},
-            ...(status === 'incorrect') ? redStyle : {},
-          };
+            ...(status === 'correct' ? greenStyle : {}),
+            ...(status === 'incorrect' ? redStyle : {}),
+          }
 
           return (
             <div key={question} style={containerStyles}>
@@ -119,29 +110,31 @@ class Trivia extends Component {
                 {multipleChoice && this.multipleChoice(item)}
               </div>
             </div>
-          );
+          )
         })}
         <Stats triviaItems={triviaItems} triviaStats={triviaStats} />
       </div>
-    );
+    )
   }
 }
 
 Trivia.propTypes = {
-  triviaItems: arrayOf(shape({
-    category: string,
-    correct_answer: string,
-    difficulty: string,
-    guess: string,
-    incorrect_answers: arrayOf(string),
-    question: string,
-    status: string,
-  })),
+  triviaItems: arrayOf(
+    shape({
+      category: string,
+      correct_answer: string,
+      difficulty: string,
+      guess: string,
+      incorrect_answers: arrayOf(string),
+      question: string,
+      status: string,
+    }),
+  ),
   triviaStats: shape({
     today: number,
     all_time: number,
   }),
-};
+}
 
 Trivia.defaultProps = {
   triviaItems: [],
@@ -149,12 +142,12 @@ Trivia.defaultProps = {
     today: 0,
     all_time: 0,
   },
-};
+}
 
 const mapStateToProps = (state) => {
-  const { triviaItems, triviaStats } = state.app;
+  const { triviaItems, triviaStats } = state.app
 
-  return { triviaItems, triviaStats };
-};
+  return { triviaItems, triviaStats }
+}
 
-export default connect(mapStateToProps)(Trivia);
+export default connect(mapStateToProps)(Trivia)
