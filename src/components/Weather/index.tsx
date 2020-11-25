@@ -1,4 +1,6 @@
 import React, { FC } from 'react'
+import add from 'date-fns/add'
+import { format } from 'date-fns'
 import { connect } from 'react-redux'
 
 import helpers from './helpers'
@@ -6,15 +8,6 @@ import Chart from '../Chart'
 import styles from './styles'
 
 const UNITS = 'F'
-const DAYS = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-]
 
 interface Weather {
   id: number
@@ -28,12 +21,10 @@ interface Props {
 }
 
 const Weather: FC<Props> = ({ weather = [] }) => {
-  const todayDate = new Date()
-  const todayNumber = todayDate.getDay()
-  const tomorrowNumber = (todayNumber + 1) % 7
+  const now = new Date()
 
-  const today = DAYS[todayNumber]
-  const tomorrow = DAYS[tomorrowNumber]
+  const today = format(now, 'EEEE')
+  const tomorrow = format(add(now, { days: 1 }), 'EEEE')
   const { getAverage, getTempObject, getPaddedArray } = helpers
 
   if (!weather) return null
