@@ -1,15 +1,35 @@
-import React from 'react'
-import { arrayOf, number, shape, string } from 'prop-types'
+import { FC } from 'react'
 
 import styles from './styles'
 
-const Stats = (props) => {
-  const { triviaItems, triviaStats } = props
+interface TriviaItem {
+  category: string
+  correct_answer: string
+  difficulty: string
+  guess: string
+  incorrect_answers: string[]
+  max_streak: number
+  question: string
+  status: string
+  streak_count: number
+}
+
+interface TriviaStat {
+  today: number
+  all_time: number
+}
+
+interface Props {
+  triviaItems: TriviaItem[]
+  triviaStats: TriviaStat
+}
+
+const Stats: FC<Props> = ({ triviaItems, triviaStats = { today: 0, all_time: 0 } }) => {
   const { today, all_time: allTime } = triviaStats
   const todayStats = Math.round(today * 100)
   const allTimeStats = Math.round(allTime * 100)
 
-  if (triviaItems.length === 0) return false
+  if (!triviaItems) return null
 
   const previousQuestion = triviaItems[1]
   const { max_streak: maxStreak, streak_count: streakCount } =
@@ -18,7 +38,7 @@ const Stats = (props) => {
     previousQuestion.status === 'incorrect' ? 'incorrect' : 'correct'
 
   return (
-    <span style={styles.containerStyles}>
+    <span>
       <table style={styles.tableStyles}>
         <thead>
           <tr>
@@ -59,32 +79,6 @@ const Stats = (props) => {
       </table>
     </span>
   )
-}
-
-Stats.propTypes = {
-  triviaItems: arrayOf(
-    shape({
-      category: string,
-      correct_answer: string,
-      difficulty: string,
-      guess: string,
-      incorrect_answers: arrayOf(string),
-      question: string,
-      status: string,
-    }),
-  ),
-  triviaStats: shape({
-    today: number,
-    all_time: number,
-  }),
-}
-
-Stats.defaultProps = {
-  triviaItems: [],
-  triviaStats: {
-    today: 0,
-    all_time: 0,
-  },
 }
 
 export default Stats

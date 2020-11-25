@@ -1,7 +1,6 @@
 export default {
-  containerStyles: {},
   statData: {
-    textAlign: 'right',
+    textAlign: 'right' as 'right',
   },
   tableHeader: {
     fontSize: '16px',
