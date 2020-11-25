@@ -6,13 +6,21 @@ import Chart from '../Chart'
 import styles from './styles'
 
 const UNITS = 'F'
-const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+const DAYS = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+]
 
 interface Weather {
-  id: number,
-  precip_chance: number,
-  temperature: number,
-  unix_time: string,
+  id: number
+  precip_chance: number
+  temperature: number
+  unix_time: string
 }
 
 interface Props {

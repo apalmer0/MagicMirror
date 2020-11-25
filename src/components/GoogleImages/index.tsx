@@ -17,7 +17,7 @@ interface Props {
   googleImages: GoogleImage[]
 }
 
-const GoogleImages: FC<Props> = ({ googleImages = []}) => {
+const GoogleImages: FC<Props> = ({ googleImages = [] }) => {
   const imageRow = (collection: GoogleImage[]) => {
     return collection.map((image) => (
       <div
@@ -36,9 +36,9 @@ const GoogleImages: FC<Props> = ({ googleImages = []}) => {
 
   return (
     <div style={styles.imagesContainer}>
-    <div style={styles.imagesRow}>{imageRow(firstImages)}</div>
-    <div style={styles.imagesRow}>{imageRow(middleImages)}</div>
-    <div style={styles.imagesRow}>{imageRow(lastImages)}</div>
+      <div style={styles.imagesRow}>{imageRow(firstImages)}</div>
+      <div style={styles.imagesRow}>{imageRow(middleImages)}</div>
+      <div style={styles.imagesRow}>{imageRow(lastImages)}</div>
     </div>
   )
 }
