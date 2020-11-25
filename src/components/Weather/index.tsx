@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import add from 'date-fns/add'
 import { format } from 'date-fns'
-import { connect } from 'react-redux'
 
 import helpers from './helpers'
 import Chart from '../Chart'
@@ -46,10 +45,4 @@ const Weather: FC<Props> = ({ weather = [] }) => {
   )
 }
 
-const mapStateToProps = (state: any) => {
-  const { weather } = state.app
-
-  return { weather }
-}
-
-export default connect(mapStateToProps)(Weather)
+export default Weather

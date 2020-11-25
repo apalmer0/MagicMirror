@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { arrayOf, number, shape, string, func } from 'prop-types'
 import { Col, Row } from 'react-bootstrap'
-import { connect } from 'react-redux'
 
 import actions from 'redux/nodes/app/actions'
 import Clock from 'components/Clock'
@@ -91,10 +90,4 @@ HomePage.defaultProps = {
   googleImages: [],
 }
 
-const mapStateToProps = (state) => {
-  const { googleImages } = state.app
-
-  return { googleImages }
-}
-
-export default connect(mapStateToProps)(HomePage)
+export default HomePage

@@ -1,5 +1,4 @@
-import React, { FC } from 'react'
-import { connect } from 'react-redux'
+import { FC } from 'react'
 
 import styles from './styles'
 
@@ -43,10 +42,4 @@ const GoogleImages: FC<Props> = ({ googleImages = [] }) => {
   )
 }
 
-const mapStateToProps = (state: any) => {
-  const { googleImages } = state.app
-
-  return { googleImages }
-}
-
-export default connect(mapStateToProps)(GoogleImages)
+export default GoogleImages

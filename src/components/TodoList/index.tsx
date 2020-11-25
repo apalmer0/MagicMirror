@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import { connect } from 'react-redux'
 
 import TodoListItem from '../TodoListItem'
 import styles from './styles'
@@ -48,10 +47,4 @@ const TodoList: FC<Props> = ({ list = [] }) => {
   )
 }
 
-const mapStateToProps = (state: any) => {
-  const list = state.app.todo
-
-  return { list }
-}
-
-export default connect(mapStateToProps)(TodoList)
+export default TodoList

@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import { connect } from 'react-redux'
 
 import Stats from '../Stats'
 import styles from './styles'
@@ -146,10 +145,4 @@ const Trivia: FC<Props> = ({ triviaItems = [], triviaStats = { all_time: 0, toda
   )
 }
 
-const mapStateToProps = (state: any) => {
-  const { triviaItems, triviaStats } = state.app
-
-  return { triviaItems, triviaStats }
-}
-
-export default connect(mapStateToProps)(Trivia)
+export default Trivia
