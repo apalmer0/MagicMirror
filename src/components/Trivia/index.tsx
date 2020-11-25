@@ -4,13 +4,6 @@ import Stats from '../Stats'
 import styles from './styles'
 import TriviaTips from '../TriviaTips'
 
-interface Options {
-  A: string
-  B: string
-  C: string
-  D: string
-}
-
 enum QuestionType {
   boolean = 'boolean',
   multiple = 'multiple',
@@ -30,7 +23,7 @@ interface TriviaItem {
   guess: string
   incorrect_answers: string[]
   max_streak: number
-  options: Options
+  options: { [key: string]: string }
   question_type: QuestionType
   question: string
   status: Status

@@ -5,7 +5,7 @@ export default {
     marginTop: '15px',
   },
   listBullet: {
-    position: 'absolute',
+    position: 'absolute' as 'absolute',
     left: '-50px',
     display: 'inline-block',
   },

@@ -17,7 +17,7 @@ interface Props {
 
 const Chart: FC<Props> = (props) => {
   const { data } = props
-  const whiteBars = { fill: WHITE }
+  const whiteBars = { fill: WHITE, strokeWidth: 1 }
 
   if (!data) return null
 

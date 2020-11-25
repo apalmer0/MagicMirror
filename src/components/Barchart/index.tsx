@@ -13,13 +13,13 @@ interface Point {
 }
 
 interface Props {
-  barWidth: number
-  data: Weather[]
-  height: number
-  labels: string[]
-  margin: number
-  points: Point[]
-  style: {
+  barWidth?: number
+  data?: Weather[]
+  height?: number
+  labels?: string[]
+  margin?: number
+  points?: Point[]
+  style?: {
     fill: string
     strokeWidth: number
   }
