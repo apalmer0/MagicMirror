@@ -1,8 +1,8 @@
 export default {
   todoStyles: {
-    position: 'absolute',
+    position: 'absolute' as 'absolute',
     right: '20px',
-    textAlign: 'right',
+    textAlign: 'right' as 'right',
     top: '50px',
   },
 }
