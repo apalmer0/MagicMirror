@@ -24,7 +24,7 @@ export default {
     fontSize: '12px',
   },
   statusStyles: {
-    fontWeight: 'bold',
+    fontWeight: 'bold' as 'bold',
   },
   guessStyle: {
     color: red,
