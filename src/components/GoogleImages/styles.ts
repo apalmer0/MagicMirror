@@ -6,7 +6,7 @@ export default {
   },
   imagesRow: {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'row' as 'row',
     height: '33%',
   },
   imageStyle: {
