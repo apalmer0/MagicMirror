@@ -30,13 +30,12 @@ class Clock extends Component {
 
   render() {
     const { date, day, time } = this.state
-    const { dateStyles, dayStyles, timeStyles } = styles
 
     return (
       <div>
-        <p style={dayStyles}>{day}</p>
-        <p style={dateStyles}>{date}</p>
-        <p style={timeStyles}>{time}</p>
+        <p style={styles.dayStyles}>{day}</p>
+        <p style={styles.dateStyles}>{date}</p>
+        <p style={styles.timeStyles}>{time}</p>
       </div>
     )
   }

@@ -42,15 +42,13 @@ class HomePage extends Component {
   getWeather = () => this.props.dispatch(actions.fetchWeather())
 
   homepageContent = () => {
-    const { halfPage, homepageContainer } = styles
-
     return (
-      <div style={homepageContainer}>
+      <div style={styles.homepageContainer}>
         <Row>
-          <Col md={6} style={halfPage}>
+          <Col md={6} style={styles.halfPage}>
             <Clock />
           </Col>
-          <Col md={6} style={halfPage}>
+          <Col md={6} style={styles.halfPage}>
             <TodoList />
           </Col>
         </Row>

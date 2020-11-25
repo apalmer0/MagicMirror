@@ -26,11 +26,10 @@ class TodoList extends Component {
   }
 
   render() {
-    const { todoStyles } = styles
     const { list } = this.props
 
     return (
-      <div style={todoStyles}>
+      <div style={styles.todoStyles}>
         <h1>To do today:</h1>
         {list.length
           ? list.map((task) => (

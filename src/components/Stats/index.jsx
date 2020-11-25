@@ -4,7 +4,6 @@ import { arrayOf, number, shape, string } from 'prop-types'
 import styles from './styles'
 
 const Stats = (props) => {
-  const { containerStyles, statData, tableHeader, tableStyles } = styles
   const { triviaItems, triviaStats } = props
   const { today, all_time: allTime } = triviaStats
   const todayStats = Math.round(today * 100)
@@ -19,42 +18,42 @@ const Stats = (props) => {
     previousQuestion.status === 'incorrect' ? 'incorrect' : 'correct'
 
   return (
-    <span style={containerStyles}>
-      <table style={tableStyles}>
+    <span style={styles.containerStyles}>
+      <table style={styles.tableStyles}>
         <thead>
           <tr>
-            <th style={tableHeader}>Percent Correct</th>
+            <th style={styles.tableHeader}>Percent Correct</th>
             <th />
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Today:</td>
-            <td style={statData}>{todayStats}%</td>
+            <td style={styles.statData}>{todayStats}%</td>
           </tr>
           <tr>
             <td>All Time:</td>
-            <td style={statData}>{allTimeStats}%</td>
+            <td style={styles.statData}>{allTimeStats}%</td>
           </tr>
         </tbody>
       </table>
-      <table style={tableStyles}>
+      <table style={styles.tableStyles}>
         <thead>
           <tr>
-            <th style={tableHeader}>Streaks</th>
+            <th style={styles.tableHeader}>Streaks</th>
             <th />
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Current:</td>
-            <td style={statData}>
+            <td style={styles.statData}>
               {streakCount} {streakType}
             </td>
           </tr>
           <tr>
             <td>Record:</td>
-            <td style={statData}>{maxStreak} correct</td>
+            <td style={styles.statData}>{maxStreak} correct</td>
           </tr>
         </tbody>
       </table>

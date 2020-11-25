@@ -11,7 +11,6 @@ class Trivia extends Component {
   multipleChoice = (item) => {
     const { correct_letter: correctLetter, guess, options, status } = item
     const letters = Object.keys(options)
-    const { answerContainerStyles, correctStyle, guessStyle } = styles
     const answered = status !== 'unanswered'
 
     return letters.map((letter) => {
@@ -19,9 +18,9 @@ class Trivia extends Component {
       const correct =
         answered && correctLetter && correctLetter.toUpperCase() === letter
       const style = {
-        ...answerContainerStyles,
-        ...(guessed ? guessStyle : {}),
-        ...(correct ? correctStyle : {}),
+        ...styles.answerContainerStyles,
+        ...(guessed ? styles.guessStyle : {}),
+        ...(correct ? styles.correctStyle : {}),
       }
 
       return (
@@ -42,15 +41,14 @@ class Trivia extends Component {
     } = item
     const answerOptions = [...incorrectAnswers, correctAnswer]
     const answered = status !== 'unanswered'
-    const { answerContainerStyles, correctStyle, guessStyle } = styles
 
     return answerOptions.map((answerOption) => {
       const guessed = startCase(guess) === answerOption
       const correct = answered && startCase(answerOption) === correctAnswer
       const style = {
-        ...answerContainerStyles,
-        ...(guessed ? guessStyle : {}),
-        ...(correct ? correctStyle : {}),
+        ...styles.answerContainerStyles,
+        ...(guessed ? styles.guessStyle : {}),
+        ...(correct ? styles.correctStyle : {}),
       }
 
       return (
@@ -62,16 +60,6 @@ class Trivia extends Component {
   }
 
   render() {
-    const {
-      categoryStyles,
-      containerStyles,
-      difficultyStyles,
-      greenStyle,
-      headerStyles,
-      questionStyles,
-      redStyle,
-      statusStyles,
-    } = styles
     const { triviaItems, triviaStats } = this.props
 
     return (
@@ -88,22 +76,22 @@ class Trivia extends Component {
           const trueFalse = questionType === 'boolean'
           const multipleChoice = questionType === 'multiple'
           const statusStyle = {
-            ...statusStyles,
-            ...(status === 'correct' ? greenStyle : {}),
-            ...(status === 'incorrect' ? redStyle : {}),
+            ...styles.statusStyles,
+            ...(status === 'correct' ? styles.greenStyle : {}),
+            ...(status === 'incorrect' ? styles.redStyle : {}),
           }
 
           return (
-            <div key={question} style={containerStyles}>
-              <div style={headerStyles}>
-                <span style={categoryStyles}>{startCase(category)}</span>
+            <div key={question} style={styles.containerStyles}>
+              <div style={styles.headerStyles}>
+                <span style={styles.categoryStyles}>{startCase(category)}</span>
                 {status !== 'unanswered' && (
                   <span style={statusStyle}>{startCase(status)}!</span>
                 )}
               </div>
               <div>
-                <span style={questionStyles}>{question}</span>
-                <span style={difficultyStyles}>({difficulty})</span>
+                <span style={styles.questionStyles}>{question}</span>
+                <span style={styles.difficultyStyles}>({difficulty})</span>
               </div>
               <div>
                 {trueFalse && this.trueFalse(item)}

@@ -14,7 +14,6 @@ class Weather extends Component {
     const today = moment().format('dddd')
     const tomorrow = moment().add(1, 'day').format('dddd')
     const { weather } = this.props
-    const { content, header } = styles
     const { getAverage, getTempObject, getPaddedArray } = helpers
 
     if (!weather) return false
@@ -23,12 +22,12 @@ class Weather extends Component {
     const tempsTomorrow = getTempObject(weather, tomorrow)
 
     return (
-      <div style={content}>
-        <h1 style={header}>
+      <div style={styles.content}>
+        <h1 style={styles.header}>
           today (avg: {getAverage(tempsToday)}° {UNITS})
         </h1>
         <Chart data={getPaddedArray(tempsToday)} />
-        <h1 style={header}>
+        <h1 style={styles.header}>
           tomorrow (avg: {getAverage(tempsTomorrow)}° {UNITS})
         </h1>
         <Chart data={tempsTomorrow} />

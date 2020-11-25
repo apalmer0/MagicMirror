@@ -7,14 +7,12 @@ import styles from './styles'
 
 class GoogleImages extends Component {
   imageRow = (collection) => {
-    const { imageStyle } = styles
-
     return collection.map((image) => (
       <div
         key={image.id}
         style={{
           backgroundImage: `url(${image.url})`,
-          ...imageStyle,
+          ...styles.imageStyle,
         }}
       />
     ))
@@ -22,16 +20,15 @@ class GoogleImages extends Component {
 
   render() {
     const { googleImages } = this.props
-    const { imagesContainer, imagesRow } = styles
     const firstImages = slice(googleImages, 0, 3)
     const middleImages = slice(googleImages, 3, 6)
     const lastImages = slice(googleImages, 6, 9)
 
     return (
-      <div style={imagesContainer}>
-        <div style={imagesRow}>{this.imageRow(firstImages)}</div>
-        <div style={imagesRow}>{this.imageRow(middleImages)}</div>
-        <div style={imagesRow}>{this.imageRow(lastImages)}</div>
+      <div style={styles.imagesContainer}>
+        <div style={styles.imagesRow}>{this.imageRow(firstImages)}</div>
+        <div style={styles.imagesRow}>{this.imageRow(middleImages)}</div>
+        <div style={styles.imagesRow}>{this.imageRow(lastImages)}</div>
       </div>
     )
   }

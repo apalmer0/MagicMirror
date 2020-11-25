@@ -7,14 +7,13 @@ import styles from './styles'
 class TodoListItem extends Component {
   render() {
     const { content } = this.props
-    const { listBullet, listContent, todoItem } = styles
 
     return (
-      <Row style={todoItem}>
-        <Col md={1} style={listBullet}>
+      <Row style={styles.todoItem}>
+        <Col md={1} style={styles.listBullet}>
           ◦
         </Col>
-        <Col md={11} style={listContent}>
+        <Col md={11} style={styles.listContent}>
           {content}
         </Col>
       </Row>
