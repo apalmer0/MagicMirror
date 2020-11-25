@@ -5,4 +5,4 @@ export default {
     textAlign: 'right',
     top: '50px',
   },
-};
+}

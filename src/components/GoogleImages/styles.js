@@ -17,4 +17,4 @@ export default {
     flex: '1',
     margin: '10px',
   },
-};
+}

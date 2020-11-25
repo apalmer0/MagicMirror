@@ -1,2 +1,2 @@
-import TodoListItem from './TodoListItem';
-export default TodoListItem;
+import TodoListItem from './TodoListItem'
+export default TodoListItem

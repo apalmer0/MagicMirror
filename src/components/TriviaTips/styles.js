@@ -4,4 +4,4 @@ export default {
     marginBottom: '10px',
     marginTop: '30px',
   },
-};
+}

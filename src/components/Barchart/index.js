@@ -1,2 +1,2 @@
-import Barchart from './Barchart';
-export default Barchart;
+import Barchart from './Barchart'
+export default Barchart

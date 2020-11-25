@@ -5,4 +5,4 @@ export default {
     right: '20px',
     top: '20px',
   },
-};
+}

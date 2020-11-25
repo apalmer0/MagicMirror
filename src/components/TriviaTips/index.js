@@ -1,3 +1,3 @@
-import TriviaTips from './TriviaTips';
+import TriviaTips from './TriviaTips'
 
-export default TriviaTips;
+export default TriviaTips

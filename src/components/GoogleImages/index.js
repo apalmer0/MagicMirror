@@ -1,3 +1,3 @@
-import GoogleImages from './GoogleImages';
+import GoogleImages from './GoogleImages'
 
-export default GoogleImages;
+export default GoogleImages

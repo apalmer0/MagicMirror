@@ -1,6 +1,5 @@
 export default {
-  containerStyles: {
-  },
+  containerStyles: {},
   statData: {
     textAlign: 'right',
   },
@@ -14,4 +13,4 @@ export default {
     display: 'inline',
     marginRight: '40px',
   },
-};
+}

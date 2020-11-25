@@ -1,3 +1,3 @@
-import Trivia from './Trivia';
+import Trivia from './Trivia'
 
-export default Trivia;
+export default Trivia

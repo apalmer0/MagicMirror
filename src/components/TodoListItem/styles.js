@@ -12,4 +12,4 @@ export default {
   listContent: {
     display: 'inline-block',
   },
-};
+}

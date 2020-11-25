@@ -1,5 +1,5 @@
-const red = '#cc0000';
-const green = '#00cc00';
+const red = '#cc0000'
+const green = '#00cc00'
 
 export default {
   containerStyles: {
@@ -39,4 +39,4 @@ export default {
   redStyle: {
     color: red,
   },
-};
+}

@@ -1,2 +1,2 @@
-import SparklinesClone from './SparklinesClone';
-export default SparklinesClone;
+import SparklinesClone from './SparklinesClone'
+export default SparklinesClone
