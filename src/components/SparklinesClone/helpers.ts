@@ -1,10 +1,19 @@
-import _ from 'lodash'
+interface Value {
+  temp: number
+}
 
-const dataToPoints = (props) => {
+interface Props {
+  data: Value[]
+  height: number
+  margin: number
+  width: number
+}
+
+const dataToPoints = (props: Props) => {
   const { data, height = 1, margin = 0, width = 1 } = props
   const tempsArray = data.map((val) => val.temp)
-  const max = _.max(tempsArray)
-  const min = _.min(tempsArray)
+  const max = Math.max(...tempsArray)
+  const min = Math.min(...tempsArray)
   const count = tempsArray.length
 
   const barWidth = (width - margin * (count + 1)) / count
