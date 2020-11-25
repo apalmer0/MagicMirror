@@ -1,10 +1,10 @@
 export default {
   header: {
-    textAlign: 'center',
+    textAlign: 'center' as 'center',
   },
   content: {
     bottom: '0',
-    position: 'absolute',
+    position: 'absolute' as 'absolute',
     width: '98%',
   },
 }
