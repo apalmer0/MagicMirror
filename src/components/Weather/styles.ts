@@ -1,8 +1,4 @@
-import { CSSProperties } from 'react'
-
-interface Styles {
-  [key: string]: CSSProperties
-}
+import { Styles } from '../../types'
 
 const styles: Styles = {
   header: {

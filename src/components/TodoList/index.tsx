@@ -1,15 +1,10 @@
 import React, { FC } from 'react'
 
+import { Todo } from '../../types'
 import TodoListItem from '../TodoListItem'
 import styles from './styles'
 
 const FRIDAY = 5
-
-interface Todo {
-  content: string
-  due: string
-  id: number
-}
 
 interface Props {
   list: Todo[]

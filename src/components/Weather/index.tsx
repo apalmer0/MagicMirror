@@ -2,21 +2,15 @@ import React, { FC } from 'react'
 import add from 'date-fns/add'
 import { format } from 'date-fns'
 
-import helpers from './helpers'
+import { WeatherData } from '../../types'
 import Chart from '../Chart'
+import helpers from './helpers'
 import styles from './styles'
 
 const UNITS = 'F'
 
-interface Weather {
-  id: number
-  precip_chance: number
-  temperature: number
-  unix_time: string
-}
-
 interface Props {
-  weather: Weather[]
+  weather: WeatherData[]
 }
 
 const Weather: FC<Props> = ({ weather = [] }) => {

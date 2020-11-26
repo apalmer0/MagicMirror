@@ -1,22 +1,13 @@
 import React, { FC } from 'react'
 
+import { GoogleImage } from '../../types'
 import styles from './styles'
 
-interface GoogleImage {
-  caption: string
-  created_at: string
-  from_number: string
-  id: number
-  query: string
-  updated_at: string
-  url: string
-}
-
 interface Props {
-  googleImages: GoogleImage[]
+  images: GoogleImage[]
 }
 
-const GoogleImages: FC<Props> = ({ googleImages = [] }) => {
+const GoogleImages: FC<Props> = ({ images = [] }) => {
   const imageRow = (collection: GoogleImage[]) => {
     return collection.map((image) => (
       <div
@@ -29,9 +20,9 @@ const GoogleImages: FC<Props> = ({ googleImages = [] }) => {
     ))
   }
 
-  const firstImages = googleImages.slice(0, 3)
-  const middleImages = googleImages.slice(3, 6)
-  const lastImages = googleImages.slice(6, 9)
+  const firstImages = images.slice(0, 3)
+  const middleImages = images.slice(3, 6)
+  const lastImages = images.slice(6, 9)
 
   return (
     <div style={styles.imagesContainer}>

@@ -1,39 +1,9 @@
 import React, { FC } from 'react'
 
+import { QuestionType, Status, TriviaItem, TriviaStat } from '../../types'
 import Stats from '../Stats'
 import styles from './styles'
 import TriviaTips from '../TriviaTips'
-
-enum QuestionType {
-  boolean = 'boolean',
-  multiple = 'multiple',
-}
-
-enum Status {
-  correct = 'correct',
-  incorrect = 'incorrect',
-  unanswered = 'unanswered',
-}
-
-interface TriviaItem {
-  category: string
-  correct_answer: string
-  correct_letter: string
-  difficulty: string
-  guess: string
-  incorrect_answers: string[]
-  max_streak: number
-  options: { [key: string]: string }
-  question_type: QuestionType
-  question: string
-  status: Status
-  streak_count: number
-}
-
-interface TriviaStat {
-  today: number
-  all_time: number
-}
 
 interface Props {
   triviaItems: TriviaItem[]

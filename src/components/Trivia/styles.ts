@@ -1,8 +1,4 @@
-import { CSSProperties } from 'react'
-
-interface Styles {
-  [key: string]: CSSProperties
-}
+import { Styles } from '../../types'
 
 const red = '#cc0000'
 const green = '#00cc00'

@@ -8,8 +8,10 @@ const Clock: FC = () => {
   const [now, setNow] = useState<Date>(new Date())
 
   useEffect(() => {
-    const newDate = new Date()
-    const timer = setInterval(() => setNow(newDate), 1000)
+    const timer = setInterval(() => {
+      const newDate = new Date()
+      setNow(newDate)
+    }, 1000)
 
     return () => clearInterval(timer)
   }, [])
