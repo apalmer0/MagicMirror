@@ -1,6 +1,12 @@
-export default {
+import { CSSProperties } from 'react'
+
+interface Styles {
+  [key: string]: CSSProperties
+}
+
+const styles: Styles = {
   statData: {
-    textAlign: 'right' as 'right',
+    textAlign: 'right',
   },
   tableHeader: {
     fontSize: '16px',
@@ -13,3 +19,5 @@ export default {
     marginRight: '40px',
   },
 }
+
+export default styles

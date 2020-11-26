@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 
 import { shadeOfBlue } from './helpers'
 
@@ -31,7 +31,7 @@ const Barchart: FC<Props> = (props) => {
     data = [],
     height = 0,
     labels = [],
-    margin= 0,
+    margin = 0,
     points = [],
     style = { fill: 'slategray', strokeWidth: 0 },
   } = props

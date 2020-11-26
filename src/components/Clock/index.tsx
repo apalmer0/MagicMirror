@@ -1,3 +1,4 @@
+import React from 'react'
 import { FC, useEffect, useState } from 'react'
 import { format } from 'date-fns'
 
@@ -13,7 +14,7 @@ const Clock: FC = () => {
     return () => clearInterval(timer)
   }, [])
 
-  const date = format(now, 'MMMM do YYYY')
+  const date = format(now, 'MMMM do yyyy')
   const day = format(now, 'EEEE')
   const time = format(now, 'h:mm a')
 

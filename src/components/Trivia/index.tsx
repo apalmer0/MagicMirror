@@ -40,9 +40,13 @@ interface Props {
   triviaStats: TriviaStat
 }
 
-const capitalize = (string: string) => string.charAt(0).toUpperCase() + string.slice(1)
+const capitalize = (string: string) =>
+  string.charAt(0).toUpperCase() + string.slice(1)
 
-const Trivia: FC<Props> = ({ triviaItems = [], triviaStats = { all_time: 0, today: 0 } }) => {
+const Trivia: FC<Props> = ({
+  triviaItems = [],
+  triviaStats = { all_time: 0, today: 0 },
+}) => {
   const renderMultipleChoice = (item: TriviaItem) => {
     const { correct_letter: correctLetter, guess, options, status } = item
     const letters = Object.keys(options)
@@ -112,7 +116,10 @@ const Trivia: FC<Props> = ({ triviaItems = [], triviaStats = { all_time: 0, toda
           ...(status === Status.correct ? styles.greenStyle : {}),
           ...(status === Status.incorrect ? styles.redStyle : {}),
         }
-        const formattedCategoryName = category.split(' ').map(capitalize).join(' ')
+        const formattedCategoryName = category
+          .split(' ')
+          .map(capitalize)
+          .join(' ')
 
         return (
           <div key={question} style={styles.containerStyles}>

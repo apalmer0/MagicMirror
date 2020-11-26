@@ -1,4 +1,10 @@
-export default {
+import { CSSProperties } from 'react'
+
+interface Styles {
+  [key: string]: CSSProperties
+}
+
+const styles: Styles = {
   imagesContainer: {
     height: '100%',
     marginBottom: '10px',
@@ -6,7 +12,7 @@ export default {
   },
   imagesRow: {
     display: 'flex',
-    flexDirection: 'row' as 'row',
+    flexDirection: 'row',
     height: '33%',
   },
   imageStyle: {
@@ -18,3 +24,5 @@ export default {
     margin: '10px',
   },
 }
+
+export default styles

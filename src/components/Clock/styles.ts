@@ -1,4 +1,10 @@
-export default {
+import { CSSProperties } from 'react'
+
+interface Styles {
+  [key: string]: CSSProperties
+}
+
+const styles: Styles = {
   dateStyles: {
     fontSize: '50px',
     marginBottom: 0,
@@ -15,3 +21,5 @@ export default {
     marginTop: '20px',
   },
 }
+
+export default styles

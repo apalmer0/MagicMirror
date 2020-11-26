@@ -1,3 +1,4 @@
+import React from 'react'
 import { FC } from 'react'
 
 import styles from './styles'
@@ -24,12 +25,15 @@ interface Props {
   triviaStats: TriviaStat
 }
 
-const Stats: FC<Props> = ({ triviaItems, triviaStats = { today: 0, all_time: 0 } }) => {
+const Stats: FC<Props> = ({
+  triviaItems = [],
+  triviaStats = { today: 0, all_time: 0 },
+}) => {
   const { today, all_time: allTime } = triviaStats
   const todayStats = Math.round(today * 100)
   const allTimeStats = Math.round(allTime * 100)
 
-  if (!triviaItems) return null
+  if (triviaItems.length === 0) return null
 
   const previousQuestion = triviaItems[1]
   const { max_streak: maxStreak, streak_count: streakCount } =

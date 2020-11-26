@@ -1,7 +1,13 @@
+import { CSSProperties } from 'react'
+
+interface Styles {
+  [key: string]: CSSProperties
+}
+
 const red = '#cc0000'
 const green = '#00cc00'
 
-export default {
+const styles: Styles = {
   containerStyles: {
     marginBottom: '40px',
   },
@@ -24,7 +30,7 @@ export default {
     fontSize: '12px',
   },
   statusStyles: {
-    fontWeight: 'bold' as 'bold',
+    fontWeight: 'bold',
   },
   guessStyle: {
     color: red,
@@ -40,3 +46,5 @@ export default {
     color: red,
   },
 }
+
+export default styles

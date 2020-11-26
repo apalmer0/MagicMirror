@@ -1,5 +1,9 @@
 import { filter, round, sum } from 'lodash'
-import moment from 'moment'
+import { format } from 'date-fns'
+import sub from 'date-fns/sub'
+import isAfter from 'date-fns/isAfter'
+import { utcToZonedTime } from 'date-fns-tz'
+import fromUnixTime from 'date-fns/fromUnixTime'
 
 const getPaddedArray = (arr) => {
   const emptyObject = {
@@ -23,13 +27,17 @@ const getAverage = (data) => {
 }
 
 const matchDayname = (unix, target) => {
-  return (
-    moment.unix(unix).format('dddd') === target &&
-    moment.unix(unix).isAfter(moment().subtract(2, 'hours'))
-  )
+  const time = fromUnixTime(unix)
+  const twoHoursAgo = sub(time, { hours: 2 })
+
+  return format(time, 'EEEE') === target && isAfter(time, twoHoursAgo)
 }
 
-const convertUnix = (time) => moment.unix(time).local().format('ha')
+const convertUnix = (unix) => {
+  const time = fromUnixTime(unix)
+  const timeInEst = utcToZonedTime(time, 'America/New_York')
+  return format(timeInEst, 'ha')
+}
 
 const getTempObject = (weather, day) => {
   return filter(weather, ({ unix_time: unixTime }) => {

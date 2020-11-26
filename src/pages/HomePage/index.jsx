@@ -2,19 +2,25 @@ import React, { Component } from 'react'
 import { arrayOf, number, shape, string, func } from 'prop-types'
 import { Col, Row } from 'react-bootstrap'
 
-import actions from 'redux/nodes/app/actions'
-import Clock from 'components/Clock'
-import GoogleImages from 'components/GoogleImages'
-import TodoList from 'components/TodoList'
-import Trivia from 'components/Trivia'
-import Weather from 'components/Weather'
+import Clock from '../../components/Clock'
+import GoogleImages from '../../components/GoogleImages'
+import TodoList from '../../components/TodoList'
+import Trivia from '../../components/Trivia'
+import Weather from '../../components/Weather'
 import styles from './styles'
 
 const ONE_HOUR = 1000 * 60 * 60 * 1
 const FIVE_SECONDS = 5000
+const actions = {
+  fetchGoogleImages: () => true,
+  fetchTodoItems: () => true,
+  fetchTriviaItems: () => true,
+  fetchTriviaStats: () => true,
+  fetchWeather: () => true,
+}
 
 class HomePage extends Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.getGoogleImages()
     this.getTodoList()
     this.getTrivia()
@@ -30,15 +36,15 @@ class HomePage extends Component {
     global.window.setInterval(() => this.getWeather(), ONE_HOUR)
   }
 
-  getGoogleImages = () => this.props.dispatch(actions.fetchGoogleImages())
+  getGoogleImages = () => actions.fetchGoogleImages()
 
-  getTodoList = () => this.props.dispatch(actions.fetchTodoItems())
+  getTodoList = () => actions.fetchTodoItems()
 
-  getTrivia = () => this.props.dispatch(actions.fetchTriviaItems())
+  getTrivia = () => actions.fetchTriviaItems()
 
-  getTriviaStats = () => this.props.dispatch(actions.fetchTriviaStats())
+  getTriviaStats = () => actions.fetchTriviaStats()
 
-  getWeather = () => this.props.dispatch(actions.fetchWeather())
+  getWeather = () => actions.fetchWeather()
 
   homepageContent = () => {
     return (

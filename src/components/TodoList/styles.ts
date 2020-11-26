@@ -1,8 +1,16 @@
-export default {
+import { CSSProperties } from 'react'
+
+interface Styles {
+  [key: string]: CSSProperties
+}
+
+const styles: Styles = {
   todoStyles: {
-    position: 'absolute' as 'absolute',
+    position: 'absolute',
     right: '20px',
-    textAlign: 'right' as 'right',
+    textAlign: 'right',
     top: '50px',
   },
 }
+
+export default styles
