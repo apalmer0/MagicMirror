@@ -7,16 +7,13 @@ import TriviaTips from '../TriviaTips'
 
 interface Props {
   triviaItems: TriviaItem[]
-  triviaStats: TriviaStat
+  triviaStats?: TriviaStat
 }
 
 const capitalize = (string: string) =>
   string.charAt(0).toUpperCase() + string.slice(1)
 
-const Trivia: FC<Props> = ({
-  triviaItems = [],
-  triviaStats = { all_time: 0, today: 0 },
-}) => {
+const Trivia: FC<Props> = ({ triviaItems, triviaStats }) => {
   const renderMultipleChoice = (item: TriviaItem) => {
     const { correct_letter: correctLetter, guess, options, status } = item
     const letters = Object.keys(options)
@@ -52,7 +49,7 @@ const Trivia: FC<Props> = ({
     const answered = status !== Status.unanswered
 
     return answerOptions.map((answerOption) => {
-      const guessed = capitalize(guess) === answerOption
+      const guessed = guess && capitalize(guess) === answerOption
       const correct = answered && capitalize(answerOption) === correctAnswer
       const style = {
         ...styles.answerContainerStyles,

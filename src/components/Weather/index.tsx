@@ -4,7 +4,7 @@ import { format } from 'date-fns'
 
 import { WeatherData } from '../../types'
 import Chart from '../Chart'
-import helpers from './helpers'
+import { getAverage, getTempObject, getPaddedArray } from './helpers'
 import styles from './styles'
 
 const UNITS = 'F'
@@ -13,12 +13,11 @@ interface Props {
   weather: WeatherData[]
 }
 
-const Weather: FC<Props> = ({ weather = [] }) => {
+const Weather: FC<Props> = ({ weather }) => {
   const now = new Date()
 
   const today = format(now, 'EEEE')
   const tomorrow = format(add(now, { days: 1 }), 'EEEE')
-  const { getAverage, getTempObject, getPaddedArray } = helpers
 
   if (!weather) return null
 

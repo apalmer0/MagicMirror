@@ -22,13 +22,12 @@ interface TriviaStat {
 
 interface Props {
   triviaItems: TriviaItem[]
-  triviaStats: TriviaStat
+  triviaStats?: TriviaStat
 }
 
-const Stats: FC<Props> = ({
-  triviaItems = [],
-  triviaStats = { today: 0, all_time: 0 },
-}) => {
+const Stats: FC<Props> = ({ triviaItems, triviaStats }) => {
+  if (!triviaStats) return null
+
   const { today, all_time: allTime } = triviaStats
   const todayStats = Math.round(today * 100)
   const allTimeStats = Math.round(allTime * 100)

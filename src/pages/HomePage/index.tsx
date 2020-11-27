@@ -1,7 +1,7 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
 
-import Clock from '../../components/Clock'
+import { API } from '../../lib/api'
 import {
   GoogleImage,
   Todo,
@@ -9,6 +9,7 @@ import {
   TriviaStat,
   WeatherData,
 } from '../../types'
+import Clock from '../../components/Clock'
 import GoogleImages from '../../components/GoogleImages'
 import TodoList from '../../components/TodoList'
 import Trivia from '../../components/Trivia'
@@ -17,37 +18,24 @@ import styles from './styles'
 
 const ONE_HOUR = 1000 * 60 * 60 * 1
 const FIVE_SECONDS = 5000
-const actions = {
-  fetchGoogleImages: () => true,
-  fetchTodoItems: () => true,
-  fetchTriviaItems: () => true,
-  fetchTriviaStats: () => true,
-  fetchWeather: () => true,
-}
 
 const HomePage: FC = () => {
-  const googleImages: GoogleImage[] = []
-  const list: Todo[] = []
-  const triviaItems: TriviaItem[] = []
-  const triviaStats: TriviaStat = { today: 1, all_time: 0 }
-  const weatherData: WeatherData[] = [
-    {
-      id: 1,
-      precip_chance: 10,
-      temperature: 40,
-      unix_time: '1606415340',
-    },
-  ]
+  const [googleImages, setGoogleImages] = useState<GoogleImage[]>([])
+  const [todoList, setTodoList] = useState<Todo[]>([])
+  const [triviaItems, setTriviaItems] = useState<TriviaItem[]>([])
+  const [triviaStats, setTriviaStats] = useState<TriviaStat>()
+  const [weatherData, setWeatherData] = useState<WeatherData[]>()
 
   useEffect(() => {
-    const fiveSecondTimer = setInterval(() => {
-      actions.fetchGoogleImages()
-      actions.fetchTodoItems()
-      actions.fetchTriviaItems()
-      actions.fetchTriviaStats()
-      actions.fetchWeather()
+    const fiveSecondTimer = setInterval(async () => {
+      setGoogleImages(await API.googleImage.loadAll())
+      setTodoList(await API.todoItem.loadAll())
+      setTriviaItems(await API.triviaItem.loadAll())
+      setTriviaStats(await API.triviaStat.loadAll())
     }, FIVE_SECONDS)
-    const oneHourTimer = setInterval(actions.fetchWeather, ONE_HOUR)
+    const oneHourTimer = setInterval(async () => {
+      setWeatherData(await API.weather.loadAll())
+    }, ONE_HOUR)
 
     return () => {
       clearInterval(fiveSecondTimer)
@@ -66,13 +54,15 @@ const HomePage: FC = () => {
               <Clock />
             </Col>
             <Col md={6} style={styles.halfPage}>
-              <TodoList list={list} />
+              <TodoList list={todoList} />
             </Col>
           </Row>
           <Row>
-            <Trivia triviaItems={triviaItems} triviaStats={triviaStats} />
+            {triviaItems.length > 0 && (
+              <Trivia triviaItems={triviaItems} triviaStats={triviaStats} />
+            )}
           </Row>
-          <Weather weather={weatherData} />
+          {weatherData && <Weather weather={weatherData} />}
         </div>
       )}
     </div>
