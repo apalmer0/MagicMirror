@@ -4,41 +4,46 @@ const red = '#cc0000'
 const green = '#00cc00'
 
 const styles: Styles = {
-  containerStyles: {
+  tips: {
+    fontSize: '14px',
+    marginBottom: '10px',
+    marginTop: '30px',
+  },
+  container: {
     marginBottom: '40px',
   },
-  headerStyles: {
+  header: {
     marginBottom: '10px',
   },
-  categoryStyles: {
+  category: {
     fontSize: '24px',
     marginRight: '40px',
     textDecoration: 'underline',
   },
-  questionStyles: {
+  question: {
     fontStyle: 'italic',
     marginRight: '20px',
   },
-  answerContainerStyles: {
+  answerContainer: {
     marginTop: '5px',
   },
-  difficultyStyles: {
+  difficulty: {
     fontSize: '12px',
   },
-  statusStyles: {
+  status: {
     fontWeight: 'bold',
   },
-  guessStyle: {
+  guessed: {
     color: red,
   },
-  correctStyle: {
+  correct: {
     color: green,
     fontSize: '20px',
   },
-  greenStyle: {
+  green: {
     color: green,
   },
-  redStyle: {
+  red: {
     color: red,
   },
 }

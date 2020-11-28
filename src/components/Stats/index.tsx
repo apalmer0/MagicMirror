@@ -1,24 +1,8 @@
 import React from 'react'
 import { FC } from 'react'
 
+import { Status, TriviaItem, TriviaStat } from '../../types'
 import styles from './styles'
-
-interface TriviaItem {
-  category: string
-  correct_answer: string
-  difficulty: string
-  guess: string
-  incorrect_answers: string[]
-  max_streak: number
-  question: string
-  status: string
-  streak_count: number
-}
-
-interface TriviaStat {
-  today: number
-  all_time: number
-}
 
 interface Props {
   triviaItems: TriviaItem[]
@@ -35,10 +19,11 @@ const Stats: FC<Props> = ({ triviaItems, triviaStats }) => {
   if (triviaItems.length === 0) return null
 
   const previousQuestion = triviaItems[1]
-  const { max_streak: maxStreak, streak_count: streakCount } =
-    triviaItems[0] || 0
+  const { max_streak: maxStreak, streak_count: streakCount } = triviaItems[0]
   const streakType =
-    previousQuestion.status === 'incorrect' ? 'incorrect' : 'correct'
+    previousQuestion.status === Status.incorrect
+      ? Status.incorrect
+      : Status.correct
 
   return (
     <span>

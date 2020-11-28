@@ -3,7 +3,6 @@ import React, { FC } from 'react'
 import { QuestionType, Status, TriviaItem, TriviaStat } from '../../types'
 import Stats from '../Stats'
 import styles from './styles'
-import TriviaTips from '../TriviaTips'
 
 interface Props {
   triviaItems: TriviaItem[]
@@ -12,6 +11,8 @@ interface Props {
 
 const capitalize = (string: string) =>
   string.charAt(0).toUpperCase() + string.slice(1)
+const formatCategory = (category: string) =>
+  category.split(' ').map(capitalize).join(' ')
 
 const Trivia: FC<Props> = ({ triviaItems, triviaStats }) => {
   const renderMultipleChoice = (item: TriviaItem) => {
@@ -24,9 +25,9 @@ const Trivia: FC<Props> = ({ triviaItems, triviaStats }) => {
       const correct =
         answered && correctLetter && correctLetter.toUpperCase() === letter
       const style = {
-        ...styles.answerContainerStyles,
-        ...(guessed ? styles.guessStyle : {}),
-        ...(correct ? styles.correctStyle : {}),
+        ...styles.answerContainer,
+        ...(guessed ? styles.guessed : {}),
+        ...(correct ? styles.correct : {}),
       }
 
       return (
@@ -52,9 +53,9 @@ const Trivia: FC<Props> = ({ triviaItems, triviaStats }) => {
       const guessed = guess && capitalize(guess) === answerOption
       const correct = answered && capitalize(answerOption) === correctAnswer
       const style = {
-        ...styles.answerContainerStyles,
-        ...(guessed ? styles.guessStyle : {}),
-        ...(correct ? styles.correctStyle : {}),
+        ...styles.answerContainer,
+        ...(guessed ? styles.guessed : {}),
+        ...(correct ? styles.correct : {}),
       }
 
       return (
@@ -67,7 +68,17 @@ const Trivia: FC<Props> = ({ triviaItems, triviaStats }) => {
 
   return (
     <div>
-      <TriviaTips />
+      <div style={styles.tips}>
+        <div>
+          To play, say &quot;Hey Google - Answer: C&quot; or &quot;Hey Google -
+          Answer: True&quot;
+        </div>
+        <div>
+          Don&apos;t know the answer? Just guess, or say &quot;Hey Google - new
+          question&quot;
+        </div>
+      </div>
+
       {triviaItems.map((item) => {
         const {
           category,
@@ -76,33 +87,31 @@ const Trivia: FC<Props> = ({ triviaItems, triviaStats }) => {
           question,
           status,
         } = item
-        const trueFalse = questionType === QuestionType.boolean
-        const multipleChoice = questionType === QuestionType.multiple
         const statusStyle = {
-          ...styles.statusStyles,
-          ...(status === Status.correct ? styles.greenStyle : {}),
-          ...(status === Status.incorrect ? styles.redStyle : {}),
+          ...styles.status,
+          ...(status === Status.correct ? styles.green : {}),
+          ...(status === Status.incorrect ? styles.red : {}),
         }
-        const formattedCategoryName = category
-          .split(' ')
-          .map(capitalize)
-          .join(' ')
 
         return (
-          <div key={question} style={styles.containerStyles}>
-            <div style={styles.headerStyles}>
-              <span style={styles.categoryStyles}>{formattedCategoryName}</span>
+          <div key={question} style={styles.container}>
+            <div style={styles.header}>
+              <span style={styles.category}>{formatCategory(category)}</span>
+
               {status !== Status.unanswered && (
                 <span style={statusStyle}>{capitalize(status)}!</span>
               )}
             </div>
+
             <div>
-              <span style={styles.questionStyles}>{question}</span>
-              <span style={styles.difficultyStyles}>({difficulty})</span>
+              <span style={styles.question}>{question}</span>
+              <span style={styles.difficulty}>({difficulty})</span>
             </div>
+
             <div>
-              {trueFalse && renderTrueFalse(item)}
-              {multipleChoice && renderMultipleChoice(item)}
+              {questionType === QuestionType.boolean
+                ? renderTrueFalse(item)
+                : renderMultipleChoice(item)}
             </div>
           </div>
         )
