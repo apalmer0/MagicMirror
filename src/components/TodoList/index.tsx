@@ -1,8 +1,9 @@
 import React, { FC } from 'react'
 
 import { Todo } from '../../types'
-import TodoListItem from '../TodoListItem'
+import friday from './friday.gif'
 import styles from './styles'
+import TodoListItem from '../TodoListItem'
 
 const FRIDAY = 5
 
@@ -10,24 +11,15 @@ interface Props {
   list: Todo[]
 }
 
-const TodoList: FC<Props> = ({ list = [] }) => {
+const TodoList: FC<Props> = ({ list }) => {
+  const today = new Date()
   const renderNoTasks = () => {
-    const today = new Date()
-    const todayIsFriday = today.getDay() === FRIDAY
     const noTasksFriday = (
-      <iframe
-        allowFullScreen
-        className="giphy-embed"
-        frameBorder="0"
-        height="260"
-        src="https://giphy.com/embed/l1BgT6CDFMPU5Ibtu"
-        title="Friday"
-        width="480"
-      />
+      <img height="260" src={friday} title="Friday" width="480" />
     )
     const noTasks = <div>no items found</div>
 
-    return todayIsFriday ? noTasksFriday : noTasks
+    return today.getDay() === FRIDAY ? noTasksFriday : noTasks
   }
 
   return (
