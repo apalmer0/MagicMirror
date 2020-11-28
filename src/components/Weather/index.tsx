@@ -2,15 +2,13 @@ import React, { FC } from 'react'
 import add from 'date-fns/add'
 import { format } from 'date-fns'
 
-import { WeatherData } from '../../types'
-import Chart from '../Chart'
 import { getAverage, getTempObject, getPaddedArray } from './helpers'
+import { WeatherData } from '../../types'
 import styles from './styles'
-
-const UNITS = 'F'
+import WeatherChart from '../WeatherChart'
 
 interface Props {
-  weather: WeatherData[]
+  weather?: WeatherData[]
 }
 
 const Weather: FC<Props> = ({ weather }) => {
@@ -21,19 +19,18 @@ const Weather: FC<Props> = ({ weather }) => {
 
   if (!weather) return null
 
-  const tempsToday = getTempObject(weather, today)
+  const tempsToday = getPaddedArray(getTempObject(weather, today))
   const tempsTomorrow = getTempObject(weather, tomorrow)
+  const todayAvg = getAverage(tempsToday)
+  const tomorrowAvg = getAverage(tempsTomorrow)
 
   return (
     <div style={styles.content}>
-      <h1 style={styles.header}>
-        today (avg: {getAverage(tempsToday)}° {UNITS})
-      </h1>
-      <Chart data={getPaddedArray(tempsToday)} />
-      <h1 style={styles.header}>
-        tomorrow (avg: {getAverage(tempsTomorrow)}° {UNITS})
-      </h1>
-      <Chart data={tempsTomorrow} />
+      <h1 style={styles.header}>today (avg: {todayAvg}° F)</h1>
+      <WeatherChart data={tempsToday} />
+
+      <h1 style={styles.header}>tomorrow (avg: {tomorrowAvg}° F)</h1>
+      <WeatherChart data={tempsTomorrow} />
     </div>
   )
 }

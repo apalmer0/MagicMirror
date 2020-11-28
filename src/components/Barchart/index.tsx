@@ -1,11 +1,7 @@
 import React, { FC } from 'react'
 
 import { shadeOfBlue } from './helpers'
-
-interface Weather {
-  temp: number
-  precip: number
-}
+import { WeatherChartData } from '../../types'
 
 interface Point {
   x: number
@@ -13,75 +9,58 @@ interface Point {
 }
 
 interface Props {
-  barWidth?: number
-  data?: Weather[]
-  height?: number
-  labels?: string[]
-  margin?: number
-  points?: Point[]
-  style?: {
-    fill: string
-    strokeWidth: number
-  }
+  data: WeatherChartData[]
+  height: number
+  labels: string[]
+  points: Point[]
 }
 
-const Barchart: FC<Props> = (props) => {
-  const {
-    barWidth = 0,
-    data = [],
-    height = 0,
-    labels = [],
-    margin = 0,
-    points = [],
-    style = { fill: 'slategray', strokeWidth: 0 },
-  } = props
-  const strokeWidth = 1 * ((style && style.strokeWidth) || 0)
-  const marginWidth = margin ? 2 * margin : 0
+const Barchart: FC<Props> = ({ data, height, labels, points }) => {
   const width =
-    barWidth ||
-    (points && points.length >= 2
-      ? Math.max(0, points[1].x - points[0].x - strokeWidth - marginWidth)
-      : 0)
-  const FONTSIZE = '3'
+    points && points.length >= 2
+      ? Math.max(0, points[1].x - points[0].x - 1)
+      : 0
 
   return (
     <g transform="scale(1,-1)">
       {points.map((point, index) => {
+        const { display, temp, precip } = data[index]
         const textProps = {
-          fontSize: FONTSIZE,
-          style,
+          fill: display ? '#fff' : '#000',
+          fontSize: 3,
+          strokeWidth: 1,
           transform: 'scale(1,-1)',
-          x: point.x,
         }
         const timeProps = {
           ...textProps,
+          x: point.x,
           y: height + 8,
         }
         const dataProps = {
           ...textProps,
-          y: point.y + Number(FONTSIZE),
+          x: point.x,
+          y: height + 4 - point.y,
         }
         const precipProps = {
           ...textProps,
-          y: point.y + Number(FONTSIZE),
+          y: height + 4 - point.y,
           x: point.x + 9,
         }
-        const { temp, precip } = data[index]
-        const fill = shadeOfBlue(precip)
+        const fill = display ? shadeOfBlue(precip) : '#000'
 
         return (
           <g key={point.x}>
-            {temp > 0 && (
-              <rect
-                x={point.x}
-                y={-height - 5}
-                width={width}
-                height={Math.max(0, height - point.y)}
-                style={{ fill }}
-              />
-            )}
-            <text {...dataProps}>{temp > 0 ? `${temp}°` : ''}</text>
-            <text {...precipProps}>{precip >= 0 ? `☔️${precip}%` : ''}</text>
+            <rect
+              height={point.y}
+              style={{ fill }}
+              width={width}
+              x={point.x}
+              y={-height - 5}
+            />
+            <text {...dataProps}>{`${temp}°`}</text>
+            <text {...precipProps}>
+              {display && precip >= 0 && `☔️${precip}%`}
+            </text>
             <text {...timeProps}>{labels[index]}</text>
           </g>
         )
