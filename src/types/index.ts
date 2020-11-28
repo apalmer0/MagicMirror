@@ -1,3 +1,4 @@
+export * from './barchart'
 export * from './googleImage'
 export * from './style'
 export * from './todo'

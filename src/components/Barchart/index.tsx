@@ -1,12 +1,7 @@
 import React, { FC } from 'react'
 
 import { shadeOfBlue } from './helpers'
-import { WeatherChartData } from '../../types'
-
-interface Point {
-  x: number
-  y: number
-}
+import { Point, WeatherChartData } from '../../types'
 
 interface Props {
   data: WeatherChartData[]

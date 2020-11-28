@@ -1,10 +1,12 @@
+import { Point } from '../../../types'
+
 interface Props {
   height: number
   values: number[]
   width: number
 }
 
-export const dataToPoints = ({ height, values, width }: Props) => {
+export const dataToPoints = ({ height, values, width }: Props): Point[] => {
   const max = Math.max(...values)
   const min = Math.min(...values)
   const difference = max - min

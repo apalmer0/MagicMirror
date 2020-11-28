@@ -21,7 +21,7 @@ const precipColors = [
   PRECIP_9,
 ]
 
-export const shadeOfBlue = (precipChance: number) => {
+export const shadeOfBlue = (precipChance: number): string => {
   const adj = precipChance > 0 ? 5 : 0
   const val = Math.floor((precipChance - adj) / 10)
 

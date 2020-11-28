@@ -10,14 +10,14 @@ const forecastBucketCount = 8
 const emptyObject = { temp: 0, time: '' }
 const emptyArray = new Array(8).fill(emptyObject)
 
-export const getPaddedArray = (arr: any[]) => {
+export const getPaddedArray = (arr: WeatherChartData[]): WeatherChartData[] => {
   const start = forecastBucketCount - arr.length
   emptyArray.splice(start, arr.length)
 
   return emptyArray.concat(arr)
 }
 
-export const getAverage = (data: WeatherChartData[]) => {
+export const getAverage = (data: WeatherChartData[]): number => {
   const displayedTemps = data.filter(({ display }) => display)
   const sum = displayedTemps.reduce((acc, curr) => acc + curr.temp, 0)
 
