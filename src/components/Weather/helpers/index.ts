@@ -4,7 +4,7 @@ import isAfter from 'date-fns/isAfter'
 import { utcToZonedTime } from 'date-fns-tz'
 import fromUnixTime from 'date-fns/fromUnixTime'
 
-import { WeatherChartData, WeatherData } from '../../../types'
+import { WeatherChartData, FormattedWeatherData } from '../../../types'
 
 const forecastBucketCount = 8
 const emptyObject = { temp: 0, time: '' }
@@ -45,12 +45,12 @@ const convertUnix = (unix: number) => {
 }
 
 export const getTempObject = (
-  weather: WeatherData[],
+  weather: FormattedWeatherData[],
   day: string,
 ): WeatherChartData[] =>
   weather
-    .filter(({ unix_time }) => matchDayname(unix_time, day))
-    .map(({ unix_time: unix, precip_chance: precip, temperature: temp }) => ({
+    .filter(({ unix }) => matchDayname(unix, day))
+    .map(({ unix, precip, temp }) => ({
       display: timeIsCurrentOrFuture(unix),
       precip,
       temp,

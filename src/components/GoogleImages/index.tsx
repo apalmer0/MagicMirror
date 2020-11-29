@@ -1,14 +1,14 @@
 import React, { FC } from 'react'
 
-import { GoogleImage } from '../../types'
+import { FormattedGoogleImage } from '../../types'
 import styles from './styles'
 
 interface Props {
-  images: GoogleImage[]
+  images: FormattedGoogleImage[]
 }
 
 const GoogleImages: FC<Props> = ({ images = [] }) => {
-  const imageRow = (collection: GoogleImage[]) => {
+  const imageRow = (collection: FormattedGoogleImage[]) => {
     return collection.map((image) => (
       <div
         key={image.id}

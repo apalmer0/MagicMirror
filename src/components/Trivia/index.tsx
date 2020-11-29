@@ -1,66 +1,46 @@
 import React, { FC } from 'react'
 
-import { QuestionType, Status, TriviaItem, TriviaStat } from '../../types'
+import {
+  QuestionType,
+  Status,
+  FormattedTriviaItem,
+  FormattedTriviaStat,
+} from '../../types'
 import Stats from '../Stats'
 import styles from './styles'
 
 interface Props {
-  triviaItems: TriviaItem[]
-  triviaStats?: TriviaStat
+  triviaItems: FormattedTriviaItem[]
+  triviaStats?: FormattedTriviaStat
 }
 
-const capitalize = (string: string) =>
-  string.charAt(0).toUpperCase() + string.slice(1)
-const formatCategory = (category: string) =>
-  category.split(' ').map(capitalize).join(' ')
-
 const Trivia: FC<Props> = ({ triviaItems, triviaStats }) => {
-  const renderMultipleChoice = (item: TriviaItem) => {
-    const { correct_letter: correctLetter, guess, options, status } = item
-    const letters = Object.keys(options)
-    const answered = status !== Status.unanswered
+  const getStyle = (guessed: boolean, correct: boolean) => ({
+    ...styles.answerContainer,
+    ...(guessed ? styles.guessed : {}),
+    ...(correct ? styles.correct : {}),
+  })
 
-    return letters.map((letter) => {
-      const guessed = guess && guess.toUpperCase() === letter
-      const correct =
-        answered && correctLetter && correctLetter.toUpperCase() === letter
-      const style = {
-        ...styles.answerContainer,
-        ...(guessed ? styles.guessed : {}),
-        ...(correct ? styles.correct : {}),
-      }
-
-      return (
-        <div style={style} key={letter}>
-          <span>{letter}: </span>
-          <span>{options[letter]}</span>
-        </div>
-      )
-    })
-  }
-
-  const renderTrueFalse = (item: TriviaItem) => {
-    const {
-      correct_answer: correctAnswer,
-      guess,
-      incorrect_answers: incorrectAnswers,
-      status,
-    } = item
-    const answerOptions = [...incorrectAnswers, correctAnswer]
-    const answered = status !== Status.unanswered
+  const renderQuestion = (
+    item: FormattedTriviaItem,
+    questionType: QuestionType,
+  ) => {
+    const { answered, answerOptions, correctOption, guess, options } = item
 
     return answerOptions.map((answerOption) => {
-      const guessed = guess && capitalize(guess) === answerOption
-      const correct = answered && capitalize(answerOption) === correctAnswer
-      const style = {
-        ...styles.answerContainer,
-        ...(guessed ? styles.guessed : {}),
-        ...(correct ? styles.correct : {}),
-      }
+      const guessed = !!guess && guess.toUpperCase() === answerOption
+      const correct = answered && answerOption === correctOption
 
       return (
-        <div style={style} key={answerOption}>
-          {answerOption}
+        <div style={getStyle(guessed, correct)} key={answerOption}>
+          {questionType === QuestionType.boolean ? (
+            { answerOption }
+          ) : (
+            <>
+              <span>{answerOption}: </span>
+              <span>{options[answerOption]}</span>
+            </>
+          )}
         </div>
       )
     })
@@ -80,13 +60,7 @@ const Trivia: FC<Props> = ({ triviaItems, triviaStats }) => {
       </div>
 
       {triviaItems.map((item) => {
-        const {
-          category,
-          difficulty,
-          question_type: questionType,
-          question,
-          status,
-        } = item
+        const { category, difficulty, questionType, question, status } = item
         const statusStyle = {
           ...styles.status,
           ...(status === Status.correct ? styles.green : {}),
@@ -96,11 +70,9 @@ const Trivia: FC<Props> = ({ triviaItems, triviaStats }) => {
         return (
           <div key={question} style={styles.container}>
             <div style={styles.header}>
-              <span style={styles.category}>{formatCategory(category)}</span>
+              <span style={styles.category}>{category}</span>
 
-              {status !== Status.unanswered && (
-                <span style={statusStyle}>{capitalize(status)}!</span>
-              )}
+              <span style={statusStyle}>{status}!</span>
             </div>
 
             <div>
@@ -108,11 +80,7 @@ const Trivia: FC<Props> = ({ triviaItems, triviaStats }) => {
               <span style={styles.difficulty}>({difficulty})</span>
             </div>
 
-            <div>
-              {questionType === QuestionType.boolean
-                ? renderTrueFalse(item)
-                : renderMultipleChoice(item)}
-            </div>
+            <div>{renderQuestion(item, questionType)}</div>
           </div>
         )
       })}

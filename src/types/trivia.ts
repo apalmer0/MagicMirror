@@ -4,9 +4,9 @@ export enum QuestionType {
 }
 
 export enum Status {
-  correct = 'correct',
-  incorrect = 'incorrect',
-  unanswered = 'unanswered',
+  correct = 'Correct',
+  incorrect = 'Incorrect',
+  unanswered = 'Unanswered',
 }
 
 export interface TriviaItem {
@@ -27,4 +27,25 @@ export interface TriviaItem {
 export interface TriviaStat {
   today: number
   all_time: number
+}
+
+export interface FormattedTriviaItem {
+  answered: boolean
+  answerOptions: string[]
+  category: string
+  correctOption: string
+  difficulty: string
+  guess: string
+  incorrectAnswers: string[]
+  maxStreak: number
+  options: { [key: string]: string }
+  question: string
+  questionType: QuestionType
+  status: Status
+  streakCount: number
+}
+
+export interface FormattedTriviaStat {
+  today: number
+  allTime: number
 }

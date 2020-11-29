@@ -32,6 +32,7 @@ const styles: Styles = {
   },
   status: {
     fontWeight: 'bold',
+    color: '#000',
   },
   guessed: {
     color: red,

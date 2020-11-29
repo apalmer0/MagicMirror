@@ -3,12 +3,12 @@ import add from 'date-fns/add'
 import { format } from 'date-fns'
 
 import { getAverage, getTempObject, getPaddedArray } from './helpers'
-import { WeatherData } from '../../types'
+import { FormattedWeatherData } from '../../types'
 import styles from './styles'
 import WeatherChart from '../WeatherChart'
 
 interface Props {
-  weather?: WeatherData[]
+  weather?: FormattedWeatherData[]
 }
 
 const Weather: FC<Props> = ({ weather }) => {

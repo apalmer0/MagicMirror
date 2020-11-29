@@ -1,11 +1,12 @@
 import { API } from '../base'
 import { ENDPOINTS } from '../endpoints'
-import { TriviaItem } from '../../../types'
+import { TRANSFORMER } from '../transformers'
+import { FormattedTriviaItem } from '../../../types'
 
-const loadAll = async (): Promise<TriviaItem[]> => {
+const loadAll = async (): Promise<FormattedTriviaItem[]> => {
   const { data } = await API.get(ENDPOINTS.triviaItems)
 
-  return data
+  return TRANSFORMER.triviaItem(data)
 }
 
 export const triviaItem = { loadAll }

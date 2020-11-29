@@ -1,11 +1,12 @@
 import { API } from '../base'
 import { ENDPOINTS } from '../endpoints'
-import { WeatherData } from '../../../types'
+import { TRANSFORMER } from '../transformers'
+import { FormattedWeatherData } from '../../../types'
 
-const loadAll = async (): Promise<WeatherData[]> => {
+const loadAll = async (): Promise<FormattedWeatherData[]> => {
   const { data } = await API.get(ENDPOINTS.weather)
 
-  return data
+  return TRANSFORMER.weather(data)
 }
 
 export const weather = { loadAll }

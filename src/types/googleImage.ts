@@ -7,3 +7,8 @@ export interface GoogleImage {
   updated_at: string
   url: string
 }
+
+export interface FormattedGoogleImage {
+  id: number
+  url: string
+}

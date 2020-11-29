@@ -3,11 +3,11 @@ import { Col, Row } from 'react-bootstrap'
 
 import { API } from '../../lib/api'
 import {
-  GoogleImage,
+  FormattedGoogleImage,
   Todo,
-  TriviaItem,
-  TriviaStat,
-  WeatherData,
+  FormattedTriviaItem,
+  FormattedTriviaStat,
+  FormattedWeatherData,
 } from '../../types'
 import Clock from '../../components/Clock'
 import GoogleImages from '../../components/GoogleImages'
@@ -20,11 +20,11 @@ const ONE_HOUR = 1000 * 60 * 60 * 1
 const FIVE_SECONDS = 5000
 
 const HomePage: FC = () => {
-  const [googleImages, setGoogleImages] = useState<GoogleImage[]>([])
+  const [googleImages, setGoogleImages] = useState<FormattedGoogleImage[]>([])
   const [todoList, setTodoList] = useState<Todo[]>([])
-  const [triviaItems, setTriviaItems] = useState<TriviaItem[]>([])
-  const [triviaStats, setTriviaStats] = useState<TriviaStat>()
-  const [weatherData, setWeatherData] = useState<WeatherData[]>()
+  const [triviaItems, setTriviaItems] = useState<FormattedTriviaItem[]>([])
+  const [triviaStats, setTriviaStats] = useState<FormattedTriviaStat>()
+  const [weatherData, setWeatherData] = useState<FormattedWeatherData[]>()
 
   useEffect(() => {
     const fiveSecondTimer = setInterval(async () => {

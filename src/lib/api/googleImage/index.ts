@@ -1,11 +1,12 @@
 import { API } from '../base'
 import { ENDPOINTS } from '../endpoints'
-import { GoogleImage } from '../../../types'
+import { TRANSFORMER } from '../transformers'
+import { FormattedGoogleImage } from '../../../types'
 
-const loadAll = async (): Promise<GoogleImage[]> => {
+const loadAll = async (): Promise<FormattedGoogleImage[]> => {
   const { data } = await API.get(ENDPOINTS.googleImages)
 
-  return data
+  return TRANSFORMER.googleImage(data)
 }
 
 export const googleImage = { loadAll }

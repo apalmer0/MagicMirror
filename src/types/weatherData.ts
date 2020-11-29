@@ -11,3 +11,10 @@ export interface WeatherData {
   temperature: number
   unix_time: number
 }
+
+export interface FormattedWeatherData {
+  id: number
+  precip: number
+  temp: number
+  unix: number
+}
