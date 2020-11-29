@@ -27,7 +27,7 @@ const TodoList: FC<Props> = ({ list }) => {
       <h1>To do today:</h1>
       {list.length
         ? list.map((task) => (
-            <TodoListItem key={task.id} content={task.content} />
+            <TodoListItem key={task.id} content={task.content} due={task.due} />
           ))
         : renderNoTasks()}
     </div>

@@ -2,7 +2,6 @@ import { Styles } from '../../types'
 
 const styles: Styles = {
   todoItem: {
-    fontSize: '25px',
     marginBottom: '15px',
     marginTop: '15px',
   },
