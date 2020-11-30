@@ -44,7 +44,7 @@ const HomePage: FC = () => {
   }, [])
 
   return (
-    <div>
+    <div style={styles.container}>
       {googleImages.length > 0 ? (
         <GoogleImages images={googleImages} />
       ) : (
