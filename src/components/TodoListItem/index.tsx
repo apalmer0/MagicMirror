@@ -24,7 +24,7 @@ const TodoListItem: FC<Props> = ({ content, due }) => {
   return (
     <div style={style}>
       <span>◦</span>
-      <span style={styles.listContent}>{content}</span>
+      <span>{content}</span>
     </div>
   )
 }
