@@ -38,13 +38,13 @@ const Trivia: FC = () => {
       const { answered, answerOptions, correctOption, guess, options } = item
 
       return answerOptions.map((answerOption) => {
-        const guessed = !!guess && guess.toUpperCase() === answerOption
+        const guessed = guess === answerOption
         const correct = answered && answerOption === correctOption
 
         return (
           <div style={getStyle(guessed, correct)} key={answerOption}>
             {questionType === QuestionType.boolean ? (
-              { answerOption }
+              <span>{answerOption}</span>
             ) : (
               <>
                 <span>{answerOption}: </span>
