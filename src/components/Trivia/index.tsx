@@ -1,50 +1,62 @@
-import React, { FC } from 'react'
+import React, { FC, useCallback, useEffect, useState } from 'react'
 
-import {
-  QuestionType,
-  Status,
-  FormattedTriviaItem,
-  FormattedTriviaStat,
-} from '../../types'
+import { API } from '../../lib/api'
+import { QuestionType, Status, FormattedTriviaItem } from '../../types'
 import Stats from '../Stats'
 import styles from './styles'
 
-interface Props {
-  triviaItems: FormattedTriviaItem[]
-  triviaStats?: FormattedTriviaStat
-}
+const Trivia: FC = () => {
+  const [items, setItems] = useState<FormattedTriviaItem[]>([])
 
-const Trivia: FC<Props> = ({ triviaItems, triviaStats }) => {
-  const getStyle = (guessed: boolean, correct: boolean) => ({
-    ...styles.answerContainer,
-    ...(guessed ? styles.guessed : {}),
-    ...(correct ? styles.correct : {}),
-  })
+  useEffect(() => {
+    const getTriviaItems = async () => {
+      try {
+        const data = await API.triviaItem.loadAll()
 
-  const renderQuestion = (
-    item: FormattedTriviaItem,
-    questionType: QuestionType,
-  ) => {
-    const { answered, answerOptions, correctOption, guess, options } = item
+        setItems(data)
+      } catch (e) {
+        console.error(e)
+      }
+    }
 
-    return answerOptions.map((answerOption) => {
-      const guessed = !!guess && guess.toUpperCase() === answerOption
-      const correct = answered && answerOption === correctOption
+    getTriviaItems()
+    const interval = setInterval(getTriviaItems, 5000)
+    return () => clearInterval(interval)
+  }, [])
 
-      return (
-        <div style={getStyle(guessed, correct)} key={answerOption}>
-          {questionType === QuestionType.boolean ? (
-            { answerOption }
-          ) : (
-            <>
-              <span>{answerOption}: </span>
-              <span>{options[answerOption]}</span>
-            </>
-          )}
-        </div>
-      )
-    })
-  }
+  const getStyle = useCallback(
+    (guessed: boolean, correct: boolean) => ({
+      ...styles.answerContainer,
+      ...(guessed ? styles.guessed : {}),
+      ...(correct ? styles.correct : {}),
+    }),
+    [],
+  )
+
+  const renderQuestion = useCallback(
+    (item: FormattedTriviaItem, questionType: QuestionType) => {
+      const { answered, answerOptions, correctOption, guess, options } = item
+
+      return answerOptions.map((answerOption) => {
+        const guessed = !!guess && guess.toUpperCase() === answerOption
+        const correct = answered && answerOption === correctOption
+
+        return (
+          <div style={getStyle(guessed, correct)} key={answerOption}>
+            {questionType === QuestionType.boolean ? (
+              { answerOption }
+            ) : (
+              <>
+                <span>{answerOption}: </span>
+                <span>{options[answerOption]}</span>
+              </>
+            )}
+          </div>
+        )
+      })
+    },
+    [],
+  )
 
   return (
     <div>
@@ -59,7 +71,7 @@ const Trivia: FC<Props> = ({ triviaItems, triviaStats }) => {
         </div>
       </div>
 
-      {triviaItems.map((item) => {
+      {items.map((item) => {
         const { category, difficulty, questionType, question, status } = item
         const statusStyle = {
           ...styles.status,
@@ -84,7 +96,7 @@ const Trivia: FC<Props> = ({ triviaItems, triviaStats }) => {
           </div>
         )
       })}
-      <Stats triviaItems={triviaItems} triviaStats={triviaStats} />
+      <Stats triviaItems={items} />
     </div>
   )
 }

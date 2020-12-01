@@ -1,17 +1,32 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import add from 'date-fns/add'
 import { format } from 'date-fns'
 
+import { API } from '../../lib/api'
 import { getAverage, getTempObject, getPaddedArray } from './helpers'
 import { FormattedWeatherData } from '../../types'
 import styles from './styles'
 import WeatherChart from '../WeatherChart'
 
-interface Props {
-  weather?: FormattedWeatherData[]
-}
+const Weather: FC = () => {
+  const [weather, setWeather] = useState<FormattedWeatherData[]>([])
 
-const Weather: FC<Props> = ({ weather }) => {
+  useEffect(() => {
+    const getWeather = async () => {
+      try {
+        const data = await API.weather.loadAll()
+
+        setWeather(data)
+      } catch (e) {
+        console.error(e)
+      }
+    }
+
+    getWeather()
+    const interval = setInterval(getWeather, 5000)
+    return () => clearInterval(interval)
+  }, [])
+
   const now = new Date()
 
   const today = format(now, 'EEEE')

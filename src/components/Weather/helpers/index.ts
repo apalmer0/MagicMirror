@@ -17,9 +17,11 @@ export const getPaddedArray = (arr: WeatherChartData[]): WeatherChartData[] => {
   return emptyArray.concat(arr)
 }
 
-export const getAverage = (data: WeatherChartData[]): number => {
+export const getAverage = (data: WeatherChartData[]): number | string => {
   const displayedTemps = data.filter(({ display }) => display)
   const sum = displayedTemps.reduce((acc, curr) => acc + curr.temp, 0)
+
+  if (data.length === 0) return '-'
 
   return Math.round(sum / displayedTemps.length)
 }

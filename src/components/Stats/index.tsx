@@ -1,18 +1,35 @@
-import React from 'react'
-import { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 
+import { API } from '../../lib/api'
 import { Status, FormattedTriviaItem, FormattedTriviaStat } from '../../types'
 import styles from './styles'
 
 interface Props {
   triviaItems: FormattedTriviaItem[]
-  triviaStats?: FormattedTriviaStat
 }
 
-const Stats: FC<Props> = ({ triviaItems, triviaStats }) => {
-  if (!triviaStats) return null
+const Stats: FC<Props> = ({ triviaItems }) => {
+  const [stats, setStats] = useState<FormattedTriviaStat>()
 
-  const { allTime, today } = triviaStats
+  useEffect(() => {
+    const getStats = async () => {
+      try {
+        const data = await API.triviaStat.loadAll()
+
+        setStats(data)
+      } catch (e) {
+        console.error(e)
+      }
+    }
+
+    getStats()
+    const interval = setInterval(getStats, 5000)
+    return () => clearInterval(interval)
+  }, [])
+
+  if (!stats) return null
+
+  const { allTime, today } = stats
   const todayStats = Math.round(today * 100)
   const allTimeStats = Math.round(allTime * 100)
 

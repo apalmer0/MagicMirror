@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import { Col, Row } from 'react-bootstrap'
 import differenceInDays from 'date-fns/differenceInDays'
 import parse from 'date-fns/parse'
 
@@ -23,14 +22,10 @@ const TodoListItem: FC<Props> = ({ content, due }) => {
   }
 
   return (
-    <Row style={style}>
-      <Col md={1} style={styles.listBullet}>
-        ◦
-      </Col>
-      <Col md={11} style={styles.listContent}>
-        {content}
-      </Col>
-    </Row>
+    <div style={style}>
+      <span>◦</span>
+      <span style={styles.listContent}>{content}</span>
+    </div>
   )
 }
 

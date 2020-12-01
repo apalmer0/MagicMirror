@@ -5,8 +5,10 @@ const styles: Styles = {
     fontFamily: 'Montserrat',
     padding: '10px',
   },
-  halfPage: {
-    display: 'inline-block',
+  topRow: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   homepageContainer: {
     height: '100%',
