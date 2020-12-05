@@ -5,6 +5,9 @@ const styles: Styles = {
     textAlign: 'right',
     width: '35%',
   },
+  gif: {
+    width: '100%',
+  },
 }
 
 export default styles

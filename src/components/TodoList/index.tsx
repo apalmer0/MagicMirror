@@ -30,9 +30,7 @@ const TodoList: FC = () => {
   const today = new Date()
 
   const renderNoTasks = useCallback(() => {
-    const noTasksFriday = (
-      <img height="260" src={friday} title="Friday" width="480" />
-    )
+    const noTasksFriday = <img src={friday} style={styles.gif} title="Friday" />
     const noTasks = <div>no items found</div>
 
     return today.getDay() === FRIDAY ? noTasksFriday : noTasks
