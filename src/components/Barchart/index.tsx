@@ -10,6 +10,8 @@ interface Props {
   points: Point[]
 }
 
+const OLD_DATA_COLOR = '#1e1e1e'
+
 const Barchart: FC<Props> = ({ data, height, labels, points }) => {
   const width =
     points && points.length >= 2
@@ -21,7 +23,7 @@ const Barchart: FC<Props> = ({ data, height, labels, points }) => {
       {points.map((point, index) => {
         const { display, temp, precip } = data[index]
         const textProps = {
-          fill: display ? '#fff' : '#000',
+          fill: display ? '#fff' : OLD_DATA_COLOR,
           fontSize: 3,
           strokeWidth: 1,
           transform: 'scale(1,-1)',
@@ -41,7 +43,7 @@ const Barchart: FC<Props> = ({ data, height, labels, points }) => {
           y: height + 4 - point.y,
           x: point.x + 9,
         }
-        const fill = display ? shadeOfBlue(precip) : '#000'
+        const fill = display ? shadeOfBlue(precip) : OLD_DATA_COLOR
 
         return (
           <g key={point.x}>
